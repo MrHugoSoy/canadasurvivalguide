@@ -1,11 +1,10 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import type { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import EmailCapture from '@/components/EmailCapture'
-import { getArticleRaw, getArticlesByCategory } from '@/lib/mdx'
+import { getArticleRaw, getArticlesByCategory, mdxToHtml } from '@/lib/mdx'
 import styles from './page.module.css'
 
 const VALID_CATEGORIES = ['before-you-go', 'first-90-days', 'work-and-money'] as const
@@ -51,13 +50,10 @@ export default async function ArticlePage({
   const article = getArticleRaw(category, slug)
   if (!article) notFound()
 
-  const { meta } = article
+  const { meta, content } = article
+  const html = await mdxToHtml(content)
   const categoryName = CATEGORY_NAMES[category as Category]
   const related = getArticlesByCategory(category).filter(a => a.slug !== slug).slice(0, 4)
-
-  const MDXContent = dynamic(
-    () => import(`../../../content/${category}/${slug}.mdx`)
-  )
 
   return (
     <>
@@ -79,9 +75,7 @@ export default async function ArticlePage({
 
       <div className={styles.layout}>
         <article className={styles.article}>
-          <div className="prose">
-            <MDXContent />
-          </div>
+          <div className="prose" dangerouslySetInnerHTML={{ __html: html }} />
           <div className={styles.articleCapture}>
             <EmailCapture />
           </div>

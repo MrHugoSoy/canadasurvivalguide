@@ -1,6 +1,9 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import { remark } from 'remark'
+import remarkHtml from 'remark-html'
+import remarkGfm from 'remark-gfm'
 
 const contentDir = path.join(process.cwd(), 'content')
 
@@ -47,4 +50,12 @@ export function getArticleRaw(category: string, slug: string) {
 export function getAllArticles(): ArticleMeta[] {
   const categories = ['before-you-go', 'first-90-days', 'work-and-money']
   return categories.flatMap(cat => getArticlesByCategory(cat))
+}
+
+export async function mdxToHtml(content: string): Promise<string> {
+  const result = await remark()
+    .use(remarkGfm)
+    .use(remarkHtml, { sanitize: false })
+    .process(content)
+  return result.toString()
 }
