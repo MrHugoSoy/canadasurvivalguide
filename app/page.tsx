@@ -47,10 +47,10 @@ const CATEGORIES = [
 ]
 
 const AFFILIATES = [
-  { emoji: '💳', name: 'Wise', type: 'Send money home', desc: 'The cheapest way to send pesos back. No hidden fees.', earn: 'Up to $50 USD bonus for new users' },
-  { emoji: '🗣', name: 'iTalki', type: 'English tutors', desc: '1-on-1 lessons with native teachers from $8/hr.', earn: '$10 credit on your first lesson' },
-  { emoji: '🛡', name: 'SafetyWing', type: 'Travel insurance', desc: 'Health coverage while your provincial plan kicks in.', earn: 'Plans from $45 USD/month' },
-  { emoji: '📚', name: 'Preply', type: 'Language learning', desc: 'Structured English courses with certified teachers.', earn: 'First lesson at 50% off' },
+  { emoji: '💳', name: 'Wise', type: 'Send money home', desc: 'The cheapest way to send pesos back. No hidden fees.', earn: 'Up to $50 USD bonus for new users', href: '#' },
+  { emoji: '🗣', name: 'iTalki', type: 'English tutors', desc: '1-on-1 lessons with native teachers from $8/hr.', earn: '$10 credit on your first lesson', href: 'https://www.italki.com/affshare?ref=af32362213' },
+  { emoji: '🛡', name: 'SafetyWing', type: 'Travel insurance', desc: 'Health coverage while your provincial plan kicks in.', earn: 'Plans from $45 USD/month', href: '#' },
+  { emoji: '📚', name: 'Preply', type: 'Language learning', desc: 'Structured English courses with certified teachers.', earn: 'First lesson at 50% off', href: '#' },
 ]
 
 export default function Home() {
@@ -166,7 +166,7 @@ export default function Home() {
           </div>
           <div className={styles.affGrid}>
             {AFFILIATES.map(a => (
-              <div key={a.name} className={styles.affCard}>
+              <a key={a.name} href={a.href} target="_blank" rel="noopener noreferrer" className={styles.affCard}>
                 <div className={styles.affTop}>
                   <div className={styles.affLogo}>{a.emoji}</div>
                   <div>
@@ -176,7 +176,7 @@ export default function Home() {
                 </div>
                 <p className={styles.affDesc}>{a.desc}</p>
                 <p className={styles.affEarn}>↗ {a.earn}</p>
-              </div>
+              </a>
             ))}
           </div>
         </div>
