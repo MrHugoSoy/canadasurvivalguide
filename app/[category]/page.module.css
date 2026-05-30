@@ -70,14 +70,15 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1px;
-  background: rgba(0, 0, 0, 0.07);
-  border: 1px solid rgba(0, 0, 0, 0.07);
+  background: transparent;
+  border: none;
 }
 
 .card {
   background: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   padding: 28px 24px;
   display: flex;
   flex-direction: column;
@@ -132,13 +133,6 @@
   font-weight: 400;
 }
 
-.empty {
-  grid-column: 1 / -1;
-  font-size: 15px;
-  color: var(--ink-3);
-  text-align: center;
-  padding: 48px 0;
-}
 
 @media (max-width: 900px) {
   .hero {

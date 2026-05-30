@@ -61,11 +61,11 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
       </section>
 
       <main className={styles.main}>
-        <div className={styles.grid}>
-          {articles.length === 0 ? (
-            <p className={styles.empty}>No articles yet — check back soon.</p>
-          ) : (
-            articles.map(article => (
+        {articles.length === 0 ? (
+          <p style={{ color: 'var(--ink-3)', fontSize: '14px' }}>No articles yet — check back soon.</p>
+        ) : (
+          <div className={styles.grid}>
+            {articles.map(article => (
               <Link
                 key={article.slug}
                 href={`/${category}/${article.slug}`}
@@ -82,9 +82,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
                   <span className={styles.readMore}>Read →</span>
                 </div>
               </Link>
-            ))
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </main>
 
       <Footer />
