@@ -1,7 +1,10 @@
+'use client'
+import { useState } from 'react'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import EmailCapture from '@/components/EmailCapture'
+import DownloadModal from '@/components/DownloadModal'
 import styles from './page.module.css'
 
 const CATEGORIES = [
@@ -54,9 +57,12 @@ const AFFILIATES = [
 ]
 
 export default function Home() {
+  const [showModal, setShowModal] = useState(false)
+
   return (
     <>
-      <Navbar />
+      <DownloadModal isOpen={showModal} onClose={() => setShowModal(false)} />
+      <Navbar onOpenGuide={() => setShowModal(true)} />
 
       {/* HERO */}
       <section className={styles.hero}>
@@ -72,7 +78,7 @@ export default function Home() {
             No legal jargon, no generic advice — just what actually works when you land.
           </p>
           <div className={styles.heroCtas}>
-            <a href="/downloads/canada-first-30-days-playbook.pdf" download className={styles.ctaMain}>Download free guide</a>
+            <button onClick={() => setShowModal(true)} className={styles.ctaMain}>Download free guide</button>
             <Link href="/before-you-go" className={styles.ctaGhost}>Start reading →</Link>
           </div>
           <div className={styles.heroProof}>

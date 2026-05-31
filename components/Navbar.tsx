@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import styles from './Navbar.module.css'
 
-export default function Navbar() {
+export default function Navbar({ onOpenGuide }: { onOpenGuide?: () => void }) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -19,9 +19,15 @@ export default function Navbar() {
           <Link href="/work-and-money">Work & money</Link>
         </div>
 
-        <a href="/downloads/canada-first-30-days-playbook.pdf" download className={styles.pill}>
-          Free guide
-        </a>
+        {onOpenGuide ? (
+          <button onClick={onOpenGuide} className={styles.pill}>
+            Free guide
+          </button>
+        ) : (
+          <a href="/downloads/canada-first-30-days-playbook.pdf" download className={styles.pill}>
+            Free guide
+          </a>
+        )}
 
         <button
           className={styles.burger}

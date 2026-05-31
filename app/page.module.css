@@ -84,6 +84,9 @@
   letter-spacing: 0.3px;
   border-radius: 2px;
   font-weight: 400;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
   transition: background 0.2s;
 }
 .ctaMain:hover { background: var(--red-dk); }
