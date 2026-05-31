@@ -7,6 +7,9 @@ const supabase = createClient(
 )
 
 export async function POST(req: NextRequest) {
+  console.log('URL configured:', !!process.env.NEXT_PUBLIC_SUPABASE_URL)
+  console.log('Key configured:', !!process.env.SUPABASE_SERVICE_ROLE_KEY)
+
   const { email } = await req.json()
 
   if (!email || !email.includes('@')) {
@@ -17,9 +20,13 @@ export async function POST(req: NextRequest) {
     .from('subscribers')
     .insert({ email, source: 'website' })
 
-  if (error && error.code !== '23505') {
-    // 23505 = duplicate, silently ignore
-    return NextResponse.json({ error: 'Failed to subscribe' }, { status: 500 })
+  if (error) {
+    console.error('Supabase error:', JSON.stringify(error))
+    if (error.code === '23505') {
+      // duplicate — treat as success
+      return NextResponse.json({ ok: true })
+    }
+    return NextResponse.json({ error: error.message, code: error.code }, { status: 500 })
   }
 
   return NextResponse.json({ ok: true })
