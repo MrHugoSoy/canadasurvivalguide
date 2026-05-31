@@ -19,9 +19,9 @@ export default function Navbar() {
           <Link href="/work-and-money">Work & money</Link>
         </div>
 
-        <Link href="/free-guide" className={styles.pill}>
+        <a href="/downloads/canada-first-30-days-playbook.pdf" download className={styles.pill}>
           Free guide
-        </Link>
+        </a>
 
         <button
           className={styles.burger}

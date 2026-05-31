@@ -72,7 +72,7 @@ export default function Home() {
             No legal jargon, no generic advice — just what actually works when you land.
           </p>
           <div className={styles.heroCtas}>
-            <Link href="/free-guide" className={styles.ctaMain}>Download free guide</Link>
+            <a href="/downloads/canada-first-30-days-playbook.pdf" download className={styles.ctaMain}>Download free guide</a>
             <Link href="/before-you-go" className={styles.ctaGhost}>Start reading →</Link>
           </div>
           <div className={styles.heroProof}>
