@@ -120,7 +120,10 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div>
+          <div className={styles.kitCapture}>
+            <p className={styles.kitCaptureLabel}>Free download</p>
+            <h3 className={styles.kitCaptureTitle}>Canada First 30 Days Playbook</h3>
+            <p className={styles.kitCaptureDesc}>Enter your email and we&apos;ll open the PDF immediately — no waiting.</p>
             <EmailCapture />
           </div>
         </div>
