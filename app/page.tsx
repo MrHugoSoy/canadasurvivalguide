@@ -62,7 +62,7 @@ export default function Home() {
   return (
     <>
       <DownloadModal isOpen={showModal} onClose={() => setShowModal(false)} />
-      <Navbar onOpenGuide={() => setShowModal(true)} />
+      <Navbar />
 
       {/* HERO */}
       <section className={styles.hero}>
