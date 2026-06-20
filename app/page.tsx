@@ -1,53 +1,10 @@
-'use client'
-import { useState } from 'react'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import EmailCapture from '@/components/EmailCapture'
-import DownloadModal from '@/components/DownloadModal'
+import HeroCTA from '@/components/HeroCTA'
+import { getArticlesByCategory } from '@/lib/mdx'
 import styles from './page.module.css'
-
-const CATEGORIES = [
-  {
-    stage: '01',
-    slug: 'before-you-go',
-    name: 'Before you go',
-    desc: 'Trámites, documents, banking setup — everything to do before you board the plane.',
-    color: '#fdf0f2',
-    iconColor: '#C8102E',
-    articles: [
-      'The complete document checklist',
-      'Open a Canadian bank before landing',
-      'What LATAM residents always forget',
-    ],
-  },
-  {
-    stage: '02',
-    slug: 'first-90-days',
-    name: 'First 90 days',
-    desc: 'SIN number, apartment hunting, cell plan, and surviving your first winter.',
-    color: '#e8f4ed',
-    iconColor: '#1d3d2a',
-    articles: [
-      'How to get your SIN in one day',
-      'Renting without Canadian credit history',
-      'The winter gear you actually need',
-    ],
-  },
-  {
-    stage: '03',
-    slug: 'work-and-money',
-    name: 'Work & money',
-    desc: 'How Canadian taxes work, workplace culture differences, and improving your English fast.',
-    color: '#fdf7e8',
-    iconColor: '#85540b',
-    articles: [
-      'Canadian taxes explained simply',
-      'Workplace culture: what shocks Latinos',
-      'Best apps to improve your English',
-    ],
-  },
-]
 
 const AFFILIATES = [
   { emoji: '💳', name: 'Wise', type: 'Send money home', desc: 'The cheapest way to send pesos back. No hidden fees.', earn: 'Up to $50 USD bonus for new users', href: 'https://wise.prf.hn/click/camref:1011l5JNf8' },
@@ -56,12 +13,38 @@ const AFFILIATES = [
   { emoji: '🗣', name: 'Cambly', type: 'English with natives', desc: 'Practice English with native Canadian and American tutors. On demand, any time.', earn: 'First lesson free', href: '#' },
 ]
 
-export default function Home() {
-  const [showModal, setShowModal] = useState(false)
+export default async function Home() {
+  const beforeYouGo = getArticlesByCategory('before-you-go')
+  const first90Days = getArticlesByCategory('first-90-days')
+  const workAndMoney = getArticlesByCategory('work-and-money')
+  const totalArticles = beforeYouGo.length + first90Days.length + workAndMoney.length
+
+  const CATEGORIES = [
+    {
+      stage: '01',
+      slug: 'before-you-go',
+      name: 'Before you go',
+      desc: 'Documents, banking setup, and everything you need to do before you board the plane.',
+      articles: beforeYouGo.slice(0, 3).map(a => a.title),
+    },
+    {
+      stage: '02',
+      slug: 'first-90-days',
+      name: 'First 90 days',
+      desc: 'SIN number, apartment hunting, cell plan, and surviving your first winter.',
+      articles: first90Days.slice(0, 3).map(a => a.title),
+    },
+    {
+      stage: '03',
+      slug: 'work-and-money',
+      name: 'Work & money',
+      desc: 'How Canadian taxes work, workplace culture, and building financial stability.',
+      articles: workAndMoney.slice(0, 3).map(a => a.title),
+    },
+  ]
 
   return (
     <>
-      <DownloadModal isOpen={showModal} onClose={() => setShowModal(false)} />
       <Navbar />
 
       {/* HERO */}
@@ -78,12 +61,12 @@ export default function Home() {
             No legal jargon, no generic advice — just what actually works when you land.
           </p>
           <div className={styles.heroCtas}>
-            <button onClick={() => setShowModal(true)} className={styles.ctaMain}>Download free guide</button>
+            <HeroCTA className={styles.ctaMain} />
             <Link href="/before-you-go" className={styles.ctaGhost}>Start reading →</Link>
           </div>
           <div className={styles.heroProof}>
             {[
-              { num: '12', lbl: 'Articles' },
+              { num: String(totalArticles), lbl: 'Articles' },
               { num: '3', lbl: 'Stages' },
               { num: 'LATAM', lbl: 'Perspective' },
               { num: 'Free', lbl: 'Always' },
