@@ -33,9 +33,26 @@ export async function generateMetadata({
   const { category, slug } = await params
   const article = getArticleRaw(category, slug)
   if (!article) return {}
+  const url = `https://canadasurvivalguide.com/${category}/${slug}`
   return {
-    title: `${article.meta.title} — Canada Survival Guide`,
+    title: article.meta.title,
     description: article.meta.description,
+    alternates: { canonical: url },
+    authors: [{ name: 'Canada Survival Guide', url: 'https://canadasurvivalguide.com' }],
+    openGraph: {
+      type: 'article',
+      url,
+      title: article.meta.title,
+      description: article.meta.description,
+      publishedTime: article.meta.date,
+      modifiedTime: article.meta.date,
+      siteName: 'Canada Survival Guide',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.meta.title,
+      description: article.meta.description,
+    },
   }
 }
 
@@ -55,8 +72,44 @@ export default async function ArticlePage({
   const categoryName = CATEGORY_NAMES[category as Category]
   const related = getArticlesByCategory(category).filter(a => a.slug !== slug).slice(0, 4)
 
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: meta.title,
+    description: meta.description,
+    datePublished: meta.date,
+    dateModified: meta.date,
+    author: {
+      '@type': 'Organization',
+      name: 'Canada Survival Guide',
+      url: 'https://canadasurvivalguide.com',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Canada Survival Guide',
+      url: 'https://canadasurvivalguide.com',
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://canadasurvivalguide.com/${category}/${slug}`,
+    },
+  }
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://canadasurvivalguide.com' },
+      { '@type': 'ListItem', position: 2, name: categoryName, item: `https://canadasurvivalguide.com/${category}` },
+      { '@type': 'ListItem', position: 3, name: meta.title, item: `https://canadasurvivalguide.com/${category}/${slug}` },
+    ],
+  }
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+
       <Navbar />
 
       <section className={styles.hero}>

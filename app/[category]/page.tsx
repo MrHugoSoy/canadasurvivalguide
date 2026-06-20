@@ -12,7 +12,7 @@ type Category = (typeof VALID_CATEGORIES)[number]
 const CATEGORY_META: Record<Category, { name: string; description: string; stage: string }> = {
   'before-you-go': {
     name: 'Before You Go',
-    description: 'Trámites, documents, banking setup — everything to do before you board the plane.',
+    description: 'Documents, banking setup, and everything you need to do before you board the plane.',
     stage: 'Stage 01',
   },
   'first-90-days': {
@@ -22,7 +22,7 @@ const CATEGORY_META: Record<Category, { name: string; description: string; stage
   },
   'work-and-money': {
     name: 'Work & Money',
-    description: 'How Canadian taxes work, workplace culture differences, and improving your English fast.',
+    description: 'How Canadian taxes work, workplace culture differences, and building financial stability.',
     stage: 'Stage 03',
   },
 }
@@ -35,9 +35,22 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
   const { category } = await params
   const meta = CATEGORY_META[category as Category]
   if (!meta) return {}
+  const url = `https://canadasurvivalguide.com/${category}`
   return {
-    title: `${meta.name} — Canada Survival Guide`,
+    title: meta.name,
     description: meta.description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: 'website',
+      url,
+      title: meta.name,
+      description: meta.description,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: meta.name,
+      description: meta.description,
+    },
   }
 }
 
