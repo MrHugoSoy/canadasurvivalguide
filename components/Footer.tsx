@@ -19,6 +19,7 @@ export default function Footer() {
           <Link href="/first-90-days">First 90 days</Link>
           <Link href="/work-and-money">Work & money</Link>
           <button className={styles.linkBtn} onClick={() => setShowModal(true)}>Free guide</button>
+          <Link href="/privacy-policy">Privacy policy</Link>
         </div>
         <div className={styles.note}>
           For Latin Americans navigating the great white north
