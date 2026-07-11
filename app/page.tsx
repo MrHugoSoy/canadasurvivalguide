@@ -11,7 +11,6 @@ const AFFILIATES = [
   { emoji: '🗣', name: 'iTalki', type: 'English tutors', desc: '1-on-1 lessons with native teachers from $8/hr.', earn: '$10 credit on your first lesson', href: 'https://www.italki.com/affshare?ref=af32362213' },
   { emoji: '🛡', name: 'SafetyWing', type: 'Travel insurance', desc: 'Health coverage while your provincial plan kicks in.', earn: 'Plans from $45 USD/month', href: 'https://safetywing.com/nomad-insurance/?referenceID=26537165&utm_source=26537165&utm_medium=Ambassador' },
   { emoji: '🗣', name: 'Cambly', type: 'English with natives', desc: 'Practice English with native Canadian and American tutors. On demand, any time.', earn: 'First lesson free', href: '#' },
-  { emoji: '📄', name: 'Resumika', type: 'Canadian-style CV', desc: 'Build a CV that passes ATS filters and matches what Canadian employers actually expect.', earn: 'Free to start', href: 'https://resumika.com' },
 ]
 
 export default async function Home() {
@@ -146,6 +145,32 @@ export default async function Home() {
                 </div>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* RESUMIKA BANNER */}
+      <section className={styles.resumika}>
+        <div className={styles.inner}>
+          <div className={styles.resumikaInner}>
+            <div className={styles.resumikaLeft}>
+              <p className={styles.resumikaTag}>From the same team</p>
+              <h2 className={styles.resumikaTitle}>Your guide is ready.<br />Now build the CV that gets you hired.</h2>
+              <p className={styles.resumikaDesc}>
+                Resumika creates Canadian-format CVs designed to pass ATS filters and match what employers in Canada actually expect — no photo, no fluff, just results.
+              </p>
+            </div>
+            <div className={styles.resumikaCta}>
+              <a
+                href="https://resumika.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.resumikaBtn}
+              >
+                Build your Canadian CV →
+              </a>
+              <p className={styles.resumikaNote}>Free to start · No account required</p>
+            </div>
           </div>
         </div>
       </section>
