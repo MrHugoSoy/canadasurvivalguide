@@ -11,6 +11,7 @@ const AFFILIATES = [
   { emoji: '🗣', name: 'iTalki', type: 'English tutors', desc: '1-on-1 lessons with native teachers from $8/hr.', earn: '$10 credit on your first lesson', href: 'https://www.italki.com/affshare?ref=af32362213' },
   { emoji: '🛡', name: 'SafetyWing', type: 'Travel insurance', desc: 'Health coverage while your provincial plan kicks in.', earn: 'Plans from $45 USD/month', href: 'https://safetywing.com/nomad-insurance/?referenceID=26537165&utm_source=26537165&utm_medium=Ambassador' },
   { emoji: '🗣', name: 'Cambly', type: 'English with natives', desc: 'Practice English with native Canadian and American tutors. On demand, any time.', earn: 'First lesson free', href: '#' },
+  { emoji: '📄', name: 'Resumika', type: 'Canadian-style CV', desc: 'Build a CV that passes ATS filters and matches what Canadian employers actually expect.', earn: 'Free to start', href: 'https://resumika.com' },
 ]
 
 export default async function Home() {
