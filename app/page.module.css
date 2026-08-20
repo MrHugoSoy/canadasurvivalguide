@@ -118,6 +118,35 @@
   gap: 3px;
 }
 
+.heroSuggested {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.heroSuggestedLabel {
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: rgba(194,221,201,0.5);
+  font-weight: 300;
+}
+
+.heroSuggestedBtn {
+  display: inline-flex;
+  align-items: center;
+  background: var(--white);
+  border-radius: 3px;
+  padding: 8px 14px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.heroSuggestedBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
 .proofNum {
   font-family: var(--font-serif);
   font-size: 26px;

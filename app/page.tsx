@@ -78,6 +78,17 @@ export default async function Home() {
               </div>
             ))}
           </div>
+          <div className={styles.heroSuggested}>
+            <span className={styles.heroSuggestedLabel}>Suggested for your job search</span>
+            <a
+              href="https://resumika.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.heroSuggestedBtn}
+            >
+              <Image src="/resumika-logo.svg" alt="Resumika — build your Canadian resume" width={88} height={30} />
+            </a>
+          </div>
         </div>
       </section>
 
