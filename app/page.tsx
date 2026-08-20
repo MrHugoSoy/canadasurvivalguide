@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import EmailCapture from '@/components/EmailCapture'
@@ -154,6 +155,9 @@ export default async function Home() {
         <div className={styles.inner}>
           <div className={styles.resumikaInner}>
             <div className={styles.resumikaLeft}>
+              <div className={styles.resumikaLogo}>
+                <Image src="/resumika-logo.svg" alt="Resumika" width={110} height={37} />
+              </div>
               <p className={styles.resumikaTag}>From the same team</p>
               <h2 className={styles.resumikaTitle}>Your guide is ready.<br />Now build the CV that gets you hired.</h2>
               <p className={styles.resumikaDesc}>

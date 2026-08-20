@@ -431,6 +431,15 @@
   min-width: 260px;
 }
 
+.resumikaLogo {
+  display: inline-flex;
+  align-items: center;
+  background: var(--white);
+  border-radius: 3px;
+  padding: 8px 14px;
+  margin-bottom: 18px;
+}
+
 .resumikaTag {
   font-size: 10px;
   letter-spacing: 2.5px;
